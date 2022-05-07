@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
 import './App.css';
-import {Todolist} from "./Todolist";
+import {TaskType, Todolist} from "./Todolist";
 export type FilterValuesType='all'|'done'|'active'
+type TasksType =TaskType[]
 function App() {
-    let [tasks, setTasks] = useState([
+    let [tasks, setTasks] = useState<TasksType>([
         {id: 1, title: "HTML&CSS", isDone: true},
         {id: 2, title: "JS", isDone: true},
         {id: 3, title: "ReactJS", isDone: false},
