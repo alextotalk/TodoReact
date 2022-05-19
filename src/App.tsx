@@ -19,6 +19,7 @@ function App() {
         newTask = {id: newTask.id, title: newTask.title, isDone: newTask.isDone}
         setTasks([newTask, ...tasks])
     }
+
     const removeTask = (idTask: string) => {
         let filterResult = tasks.filter(task => task.id !== idTask)
         setTasks(filterResult)
@@ -26,31 +27,33 @@ function App() {
     let [filter, setFilter] = useState<FilterValuesType>('all')
     let tasksForTodoList = tasks
     if (filter === 'active') {
-        tasksForTodoList = tasks.filter(task => task.isDone)
+        tasksForTodoList = tasks.filter(task => !task.isDone)
     }
     if (filter === 'done') {
-        tasksForTodoList = tasks.filter(task => !task.isDone)
+        tasksForTodoList = tasks.filter(task => task.isDone)
     }
     const changeFilter = (value: FilterValuesType) => {
         setFilter(value)
     }
-    const changeStatusTask=(idTask: string,valueStatus:boolean)=>{
-        let task=tasks.find(task=>idTask===task.id)
-        if (task){
-            task.isDone=valueStatus
+    const changeStatusTask = (idTask: string, valueStatus: boolean) => {
+        let task = tasks.find(task => idTask === task.id)
+        if (task) {
+            task.isDone = valueStatus
             setTasks([...tasks])
         }
     }
     return (
         <React.StrictMode>
-            <div className="App">
+            <div className='App'>
                 <Todolist
-                    title="What to learn"
+                    title='What to learn'
                     removeTask={removeTask}
                     addTask={addTask}
                     tasks={tasksForTodoList}
                     changeFilter={changeFilter}
-                    changeStatusTask={changeStatusTask}/>
+                    changeStatusTask={changeStatusTask}
+                    filterMark={filter}
+                />
             </div>
         </React.StrictMode>
     );
