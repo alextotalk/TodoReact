@@ -13,6 +13,7 @@ function App() {
         {id: v1(), title: "ReactJS", isDone: false},
         {id: v1(), title: "restAPI", isDone: true},
         {id: v1(), title: "GraphQL", isDone: false}
+
     ])
     const addTask = (newTask: TaskType) => {
         newTask = {id: newTask.id, title: newTask.title, isDone: newTask.isDone}
@@ -33,6 +34,13 @@ function App() {
     const changeFilter = (value: FilterValuesType) => {
         setFilter(value)
     }
+    const changeStatusTask=(idTask: string,valueStatus:boolean)=>{
+        let task=tasks.find(task=>idTask===task.id)
+        if (task){
+            task.isDone=valueStatus
+            setTasks([...tasks])
+        }
+    }
     return (
         <React.StrictMode>
             <div className="App">
@@ -41,7 +49,8 @@ function App() {
                     removeTask={removeTask}
                     addTask={addTask}
                     tasks={tasksForTodoList}
-                    changeFilter={changeFilter}/>
+                    changeFilter={changeFilter}
+                    changeStatusTask={changeStatusTask}/>
             </div>
         </React.StrictMode>
     );
