@@ -66,8 +66,7 @@ function App() {
 
     const changeStatusTask = ( todoListID: string, idTask: string, valueStatus: boolean) => {
 
-        console.log(idTask,valueStatus,todoListID)
-        setTasks({...tasks, [todoListID]: tasks[todoListID].map(t => t.id === idTask ?{...t,isDone:valueStatus}:  t)})
+         setTasks({...tasks, [todoListID]: tasks[todoListID].map(t => t.id === idTask ?{...t,isDone:valueStatus}:  t)})
     }
     const removeTodoList = (todoListID: string) => {
         setTodoLists(todoLists.filter(tl => tl.id !== todoListID))
