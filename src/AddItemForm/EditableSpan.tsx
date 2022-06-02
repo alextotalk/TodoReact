@@ -17,6 +17,7 @@ export const EditableSpan = (props: EditableSpanTypeProps) => {
 
     const onKeyPressHandler = (event: KeyboardEvent<HTMLInputElement>) => {
         if (event.key === 'Enter') {
+            setEdit(!edit)
             addTask()
         }
     }

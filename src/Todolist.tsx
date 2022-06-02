@@ -1,4 +1,4 @@
-import React, {ChangeEvent, KeyboardEvent, useState} from "react";
+import React, {ChangeEvent } from "react";
 import {FilterValuesType} from "./App";
 import './App.css';
 import {AddItemForm} from "./AddItemForm/AddItemForm";
@@ -20,6 +20,7 @@ type PropsType = {
     removeTodoList: (todoListID: string) => void
     filterMark: FilterValuesType
     editTodoList: (todoListID: string, newTitle: string) => void
+    changTitleTaskForTodolist: (newTitle: string, todoListID: string, taskID: string) =>void
 }
 
 export function Todolist(props: PropsType) {
@@ -40,6 +41,7 @@ export function Todolist(props: PropsType) {
     let editHandlerTodoList = (title: string) => {
         props.editTodoList(props.todoListId, title)
     };
+
     return (
         <div>
             <EditableSpan title={props.title} changTitle={editHandlerTodoList}/>
@@ -58,10 +60,13 @@ export function Todolist(props: PropsType) {
                         props.changeStatusTask(props.todoListId, task.id, valueStatus)
 
                     }
+                    const changTitleTaskTodolist=(newTitle:string)=> {
+                        props.changTitleTaskForTodolist(newTitle,props.todoListId,task.id)
+                    }
                     return <li className={task.isDone ? 'is-done' : ''} key={task.id}>
                         <input readOnly type='checkbox'
                                onChange={onChangeHandler} checked={task.isDone}/>
-                        {task.title}
+                         <EditableSpan title={task.title} changTitle={changTitleTaskTodolist}/>
                         <button onClick={onClickHandler}>✖
                         </button>
                     </li>

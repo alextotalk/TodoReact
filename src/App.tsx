@@ -24,7 +24,7 @@ function App() {
         {id: todoListID_1, title: 'What to learn', filter: 'all'},
         {id: todoListID_2, title: "What to buy", filter: 'all'},
     ])
-    let [tasks, setTasks] = useState<TasksStateType>({
+    const [tasks, setTasks] = useState<TasksStateType>({
         [todoListID_1]: [
             {id: v1(), title: "HTML&CSS", isDone: true},
             {id: v1(), title: "JS", isDone: true},
@@ -50,7 +50,10 @@ function App() {
     const editTodoList = (todoListID: string, newTitle: string) => {
         setTodoLists(todoLists.map(tl => tl.id === todoListID ? {...tl, title: newTitle} : tl))
     }
-
+    const changTitleTaskForTodolist = (newTitle: string, todoListID: string, taskID: string) => {
+        setTasks({...tasks, [todoListID]: tasks[todoListID].map(t => t.id === taskID ? {...t, title: newTitle} : t)})
+        // alert(newTitle)
+    }
 
     const removeTodoList = (todoListID: string) => {
         setTodoLists(todoLists.filter(tl => tl.id !== todoListID))
@@ -114,6 +117,7 @@ function App() {
                             changeStatusTask={changeStatusTask}
                             removeTodoList={removeTodoList}
                             editTodoList={editTodoList}
+                            changTitleTaskForTodolist={changTitleTaskForTodolist}
                         />
                     </div>
                 )
